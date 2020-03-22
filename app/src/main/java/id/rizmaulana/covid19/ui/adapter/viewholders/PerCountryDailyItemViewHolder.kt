@@ -7,7 +7,7 @@ import id.rizmaulana.covid19.databinding.ItemDailyPercountryBinding
 import id.rizmaulana.covid19.ui.adapter.BaseViewHolder
 import id.rizmaulana.covid19.ui.base.BaseViewItem
 import id.rizmaulana.covid19.util.NumberUtils
-import id.rizmaulana.covid19.util.ext.getString
+import id.rizmaulana.covid19.util.ext.getStringWithArg
 
 data class PerCountryDailyItem(
     val id: Int = 0,
@@ -34,12 +34,23 @@ class PerCountryDailyItemViewHolder(itemView: View) :
         with(binding) {
             txtInformation.text = itemView.context.getString(item.info)
             txtDate.text = "${NumberUtils.formatShortDate(item.date)} (Day #${item.day})"
-            txtConfirmed.text =
-                "${getString(R.string.confirmed)} : ${NumberUtils.numberFormat(item.totalConfirmed)}"
-            txtDeath.text =
-                "${getString(R.string.deaths)} : ${NumberUtils.numberFormat(item.totalDeath)}"
-            txtRcv.text =
-                "${getString(R.string.recovered)} : ${NumberUtils.numberFormat(item.totalRecovered)}"
+            txtConfirmed.text = getStringWithArg(
+                R.string.confirmed_case_count,
+                NumberUtils.numberFormat(item.totalConfirmed)
+            )
+            txtDeath.text = getStringWithArg(
+                R.string.death_case_count,
+                NumberUtils.numberFormat(item.totalDeath)
+            )
+            txtRcv.text = getStringWithArg(
+                R.string.recovered_case_count,
+                NumberUtils.numberFormat(item.totalRecovered)
+            )
+            txtNewCase.text = getStringWithArg(
+                R.string.new_case_case_count,
+                NumberUtils.numberFormat(item.confirmed)
+            )
+
         }
     }
 
