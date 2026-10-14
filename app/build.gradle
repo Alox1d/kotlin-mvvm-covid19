@@ -16,6 +16,10 @@ android {
 
     defaultConfig {
         applicationId packageName
+        // SETUP: supply MAPS_API_KEY in user Gradle properties or the environment.
+        manifestPlaceholders = [MAPS_API_KEY: project.hasProperty('MAPS_API_KEY')
+                ? project.property('MAPS_API_KEY').toString()
+                : (System.getenv('MAPS_API_KEY') ?: '')]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
